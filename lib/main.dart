@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pokemon/poke_detail.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,52 +16,61 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: const TopPage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+class TopPage extends StatelessWidget {
+  const TopPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Stack(children: [
-              Padding(
-                padding: const EdgeInsets.all(32),
-                child: Image.network(
-                  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
-                  width: 100,
-                  height: 100,
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  'No.25',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              )
-            ]),
-            const Text(
-              'pikachu',
-              style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+        body: ListView.builder(
+      itemCount: 1000,
+      itemBuilder: (context, index) => ListItem(
+        index: index,
+      ),
+    ));
+  }
+}
+
+class ListItem extends StatelessWidget {
+  const ListItem({super.key, required this.index});
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Container(
+        width: 80,
+        decoration: BoxDecoration(
+          color: Colors.yellow.withOpacity(.5),
+          borderRadius: BorderRadius.circular(10),
+          image: const DecorationImage(
+            fit: BoxFit.fitWidth,
+            image: NetworkImage(
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
             ),
-            const Chip(
-              label: Text('electric'),
-              backgroundColor: Colors.yellow,
-            )
-          ],
+          ),
         ),
       ),
+      title: const Text(
+        'Pikachu',
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      subtitle: const Text(
+        '⚡️electric',
+      ),
+      trailing: const Icon(Icons.navigate_next),
+      onTap: () => {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (BuildContext context) => const PokeDetail(),
+          ),
+        ),
+      },
     );
   }
 }
