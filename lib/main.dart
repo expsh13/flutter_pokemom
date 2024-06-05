@@ -25,13 +25,40 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text(
-          'Hellow World',
-          style: TextStyle(
-            fontSize: 36,
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Stack(children: [
+              Padding(
+                padding: const EdgeInsets.all(32),
+                child: Image.network(
+                  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+                  width: 100,
+                  height: 100,
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8),
+                child: Text(
+                  'No.25',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            ]),
+            const Text(
+              'pikachu',
+              style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+            ),
+            const Chip(
+              label: Text('electric'),
+              backgroundColor: Colors.yellow,
+            )
+          ],
         ),
       ),
     );
