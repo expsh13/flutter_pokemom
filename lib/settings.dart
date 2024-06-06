@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pokemon/Theme_mode_selection.dart';
+import 'package:flutter_pokemon/utils/theme_mode.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -10,6 +11,12 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   ThemeMode _themeMode = ThemeMode.system;
+
+  @override
+  void initState() {
+    super.initState();
+    loadThemeMode().then((val) => setState(() => _themeMode = val));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +35,7 @@ class _SettingsState extends State<Settings> {
               ),
             );
             setState(() => _themeMode = ret!);
+            await saveThemeMode(_themeMode);
           },
         ),
       ],
